@@ -608,8 +608,9 @@ def train():
 
                 if problem_files.size > 0:
                     problem_files = [f.decode('utf8') for f in problem_files[..., 0]]
-                    log_error('The following {} files caused an infinite (or NaN) '
-                              'loss: {}'.format(len(problem_files), ','.join(problem_files)))
+                    log_error('{} problematic files in batch'.format(len(problem_files)))
+                    # log_error('The following {} files caused an infinite (or NaN) '
+                    #           'loss: {}'.format(len(problem_files), ','.join(problem_files)))
 
                 total_loss += batch_loss
                 step_count += 1
