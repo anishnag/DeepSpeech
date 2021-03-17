@@ -248,9 +248,9 @@ def calculate_mean_edit_distance_and_loss(iterator, dropout, reuse):
 
     # Check if any files lead to non finite loss
     non_finite_files = tf.gather(batch_filenames, tfv1.where(~tf.math.is_finite(total_loss)))
-
+    
     # Calculate the average loss across the batch
-    avg_loss = tf.reduce_mean(input_tensor=total_loss)
+    avg_loss = tf.reduce_mean(input_tensor=tf.boolean_mask(total_loss, tf.is_finite(total_loss)))
 
     # Finally we return the average loss
     return avg_loss, non_finite_files
